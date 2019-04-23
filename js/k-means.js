@@ -3,7 +3,7 @@ class KMeans {
      * 
      * @param {*} data Each row of the dataset contains a X vector
      */
-    constructor(data, b, epsilon){
+    constructor(data, b, epsilon, c){
         this.data = data;
 
         if(!this.data instanceof Array || this.data.length < 1 || this.data[0].length < 1 || b < 2 || epsilon <= 0)
@@ -13,7 +13,8 @@ class KMeans {
         this.b = b;
         this.e = epsilon;
         this.n = data.length;
-        this.c = data[0].length - 1; // Num classes (note: -1 because the last column contains the class)
+        // this.c = data[0].length - 1; // Num classes (note: -1 because the last column contains the class)
+        this.c = c;
         this.dimX = this.c;
         this.centers = [];
         for (let i = 0; i < this.c; i++) this.centers.push(data[this._getRndInteger(0, this.n)]);
@@ -24,13 +25,17 @@ class KMeans {
         this.d = {};
         this.dinv = {};
 
+        this.t = 0;
+
         this.algorithm();
     }
 
     algorithm(){
+        console.log(`\n#########################################\n\tIteration ${++this.t}`);
         this.calcDistances();
         console.log('Euclidean distances calculated...');
         let U = [];
+
         for (let j = 0; j < this.n; j++) {
             let Pxj = [];
             for (let i = 0; i < this.c; i++)
@@ -39,13 +44,25 @@ class KMeans {
         }
         console.log('Degree of belonging matrix calculated...');
         
-        let centers = this.centers.slice();
+        let oldCenters = this.centers.slice();
         for (let i = 0; i < this.c; i++) {
             this.centers[i] = this.calcVector(U, i);
         }
 
         console.log('Learned vectors calculated...');
         console.log(this.centers);
+
+
+        // Has it finished?
+        for (let i = 0; i < this.c; i++) {
+            if(this._euclideanDistance(oldCenters[i], this.centers[i]) >= this.e){
+                console.log(`Not yet... it could learn something else...`);
+                this.algorithm();
+                return;
+            }
+        }
+
+        $('#testVector').show();
     }
 
     calcVector(U, i){
@@ -85,6 +102,14 @@ class KMeans {
         return r;
     }
 
+    _euclideanDistance(v1, v2){
+        let r = 0;
+        for (let k = 0; k < this.dimX; k++)
+            r += Math.pow(v1[k] - v2[k], 2);
+
+        return Math.sqrt(r);
+    }
+
     calcDistances(){
         let bInv = 1/(this.b - 1);
         for (let j = 0; j < this.n; j++) {
@@ -100,5 +125,20 @@ class KMeans {
 
     _getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+    testVector(v){
+        console.log(`Testing: ${v}`);
+        let d = this._euclideanDistance(v[0], this.centers[0]), c = 0;
+        for (let i = 1; i < this.c; i++) {
+            let _d = this._euclideanDistance(v, this.centers[i]);
+            console.log(_d);
+            if(_d < d){
+                d = _d;
+                c = i;
+            }
+        }
+
+        return c;
     }
 }

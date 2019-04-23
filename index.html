@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
@@ -16,7 +17,7 @@
 
 <body>
     <h3>Fuzzy C-Means Clustering
-    <small class="text-muted">a soft version of k-means</small></h3>
+        <small class="text-muted">a soft version of k-means</small></h3>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm">
@@ -24,7 +25,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm-b">b</span>
                     </div>
-                    <input type="number" value="2" min="2" class="form-control" id="k-means-param-b" aria-label="b" aria-describedby="inputGroup-sizing-sm">
+                    <input type="number" value="2" min="2" class="form-control" id="k-means-param-b" aria-label="b"
+                        aria-describedby="inputGroup-sizing-sm">
                 </div>
             </div>
             <div class="col-sm">
@@ -32,20 +34,44 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">&epsilon;</span>
                     </div>
-                    <input type="number" value="0.02" min="0.00" step="0.01" id="k-means-param-e" class="form-control" aria-label="Epsilon" aria-describedby="inputGroup-sizing-sm">
+                    <input type="number" value="0.02" min="0.00" step="0.01" id="k-means-param-e" class="form-control"
+                        aria-label="Epsilon" aria-describedby="inputGroup-sizing-sm">
                 </div>
             </div>
-            <div class="col-sm"></div>
+            <div class="col-sm">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">Classes</span>
+                        </div>
+                        <input type="number" value="2" min="0" step="1" id="k-means-param-c" class="form-control"
+                            aria-label="Classes" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
             <div class="col-sm"></div>
         </div>
 
         <div class="input-group mb-3">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile02">
-                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose
+                    file</label>
             </div>
             <div class="input-group-append">
                 <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+            </div>
+        </div>
+
+        <div class="mb-3" id="testVector" style="display: none;">
+            <h5>Test a vector</h5>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile03">
+                    <label class="custom-file-label" for="inputGroupFile03"
+                        aria-describedby="inputGroupFileAddon03">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="inputGroupFileAddon03">Upload</span>
+                </div>
             </div>
         </div>
     </div>
