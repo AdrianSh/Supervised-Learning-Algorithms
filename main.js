@@ -8,8 +8,15 @@ $(document).ready(function () {
 	});
 
 	$('#inputGroupFileAddon03').click(function () {
+		$('#testResults').empty();
 		new CSVReader($('#inputGroupFile03'), results => {
-			console.log(KMeansInstance.testVector(results.data.pop()));
+			let testResult = KMeansInstance.testVector(results.data.pop());
+
+			$('#testResult').text(`Class ${testResult[1]}`);
+			
+			testResult[0].forEach((v, i) => {
+				$('#testResults').append(`<tr><td>Class ${i}</td><td>${v}</td></tr>`);
+			});
 		});
 	});
 });

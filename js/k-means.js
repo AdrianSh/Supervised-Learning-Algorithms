@@ -15,7 +15,20 @@ class KMeans {
         this.n = data.length;
         // this.c = data[0].length - 1; // Num classes (note: -1 because the last column contains the class)
         this.c = c;
-        this.dimX = this.c;
+        this.dimX = data[0].length - 1;
+
+        /*
+        this.classNames = [];
+
+        this.data.forEach(v => {
+            // Add the className, as it's on the last column
+            if(this.classNames.indexOf(v[this.dimX]) < 0)
+            this.classNames.push(v[this.dimX]);
+        });
+
+        console.log(this.classNames);
+        */
+
         this.centers = [];
         for (let i = 0; i < this.c; i++) this.centers.push(data[this._getRndInteger(0, this.n)]);
         this.initCenters = this.centers.slice();
@@ -42,6 +55,7 @@ class KMeans {
                 Pxj[i] = this.dinv[`${i}x${j}`] / this.dinv[`x${j}`];
             U.push(Pxj);
         }
+        
         console.log('Degree of belonging matrix calculated...');
         
         let oldCenters = this.centers.slice();
@@ -129,16 +143,10 @@ class KMeans {
 
     testVector(v){
         console.log(`Testing: ${v}`);
-        let d = this._euclideanDistance(v[0], this.centers[0]), c = 0;
-        for (let i = 1; i < this.c; i++) {
-            let _d = this._euclideanDistance(v, this.centers[i]);
-            console.log(_d);
-            if(_d < d){
-                d = _d;
-                c = i;
-            }
-        }
-
-        return c;
+        let d = [];
+        for (let i = 0; i < this.c; i++)
+            d[i] = this._euclideanDistance(v, this.centers[i]);
+        
+        return [d, d.indexOf(Math.min(...d))];
     }
 }
