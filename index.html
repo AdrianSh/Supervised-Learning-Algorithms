@@ -39,17 +39,56 @@
                 </div>
             </div>
             <div class="col-sm">
-                    <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">Classes</span>
-                        </div>
-                        <input type="number" value="2" min="0" step="1" id="k-means-param-c" class="form-control"
-                            aria-label="Classes" aria-describedby="inputGroup-sizing-sm">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">Classes</span>
                     </div>
+                    <input type="number" value="2" min="0" step="1" id="k-means-param-c" class="form-control"
+                        aria-label="Classes" aria-describedby="inputGroup-sizing-sm">
                 </div>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+
+
+
+    <h3>Gaussian naive Bayes
+        <small class="text-muted">Continuous values as Gaussian distribution</small></h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm-b">b</span>
+                    </div>
+                    <input type="number" value="2" min="2" class="form-control" id="g-bayes-param-b" aria-label="b"
+                        aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">&epsilon;</span>
+                    </div>
+                    <input type="number" value="0.02" min="0.00" step="0.01" id="k-means-param-e" class="form-control"
+                        aria-label="Epsilon" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">Classes</span>
+                    </div>
+                    <input type="number" value="2" min="0" step="1" id="k-means-param-c" class="form-control"
+                        aria-label="Classes" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
             <div class="col-sm"></div>
         </div>
 
+    </div>
+    <div class="container-fluid">
         <div class="input-group mb-3">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile02">
@@ -83,8 +122,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/PapaParse/papaparse.min.js"></script>
+    <script src="vendor/Math/math.min.js"></script>
     <script src="js/CSVReader.js"></script>
     <script src="js/k-means.js"></script>
+    <script src="js/Gaussian-naive-Bayes.js"></script>
     <script src="main.js"></script>
 </body>
 
