@@ -13,23 +13,27 @@ class GaussiannaiveBayes {
         // Calc m vectors
         this.m = {};
         this.C = {};
+        this.C_Inv = {};
         this._m();
 
-        console.log(`dimX = ${this.dimX}, n = ${this.n}, m = ${JSON.stringify(this.m)}, C = ${JSON.stringify(this.C)}`)
+        console.log(`GaussiannaiveBayes params: \n\tdimX = ${this.dimX}, \n\tn = ${this.n}, \n\tm = ${JSON.stringify(this.m)}, \n\tC = ${JSON.stringify(this.C)}\n`)
         this.algorithm();
-        console.log(this.C)
+
+        $('#testVector').show();
     }
 
     algorithm(){
         // Let's calculate cov matrix
         for (let x of this.data) {
-            let c = x[this.dimX];
-            let s = math.subtract(x, this.m[c].v);
-            this.C[c] = math.add(this.C[c], math.multiply(s, math.transpose(s)));
+            let c = x[this.dimX]; // Extract class name
+            let _x = x.slice(0, this.dimX);
+            let s = math.subtract(_x, this.m[c].v);
+            this.C[c] = math.add(this.C[c], math.multiply(math.transpose([s]), [s]));
         }
-        
+
         for(let c of Object.getOwnPropertyNames(this.m)){
             this.C[c] = math.divide(1/this.m[c].n, this.C[c]);
+            this.C_Inv[c] = math.inv(this.C[c]); // Calc inverse
         }
     }
 
@@ -55,5 +59,24 @@ class GaussiannaiveBayes {
         }
     }
 
+    testVector(x){
+        console.log(`Testing vector: ${x}`);
+        if(x.length > this.dimX)
+            x = x.slice(0, this.dimX);
 
+        let dm = [];
+        let minDm = [null, Number.MAX_SAFE_INTEGER];
+        for(let c of Object.getOwnPropertyNames(this.m)){
+            let s = math.subtract(x, this.m[c].v);
+            console.log(`dm(x, C=${c}, m) = ${(1/ (Math.pow(2 * Math.PI, this.dimX / 2) * Math.pow(math.det(this.C[c]), 1/2)  ))} * e ^ ${-1/2 * math.multiply(math.multiply(math.transpose(s), this.C_Inv[c]), s)} = ${(1/ (Math.pow(2 * Math.PI, this.dimX / 2) * Math.pow(math.det(this.C[c]), 1/2)  )) * Math.exp(-1/2 * math.multiply(math.multiply(math.transpose(s), this.C_Inv[c]), s) )}`);
+            // let v = (1/ (Math.pow(2 * Math.PI, this.dimX / 2) * Math.pow(math.det(this.C[c]), 1/2)  )) * Math.exp(-1/2 * math.multiply(math.multiply(math.transpose(s), this.C_Inv[c]), s) );
+            let v = math.multiply(math.multiply(math.transpose(s), this.C_Inv[c]), s);
+            dm.push({ className: c, value : v});
+            if(v < minDm[1])
+                minDm = [c, v];
+        }
+
+        console.log(dm);
+        return [dm, minDm[0]];
+    }
 }

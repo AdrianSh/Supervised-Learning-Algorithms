@@ -8,3 +8,8 @@ h3 {
     margin-top: 1vh;
     text-align: center;
 }
+
+tr.result {
+    background: #00800052;
+    box-shadow: inset 0px 0px 2px green;
+}

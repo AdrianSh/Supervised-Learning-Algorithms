@@ -142,7 +142,7 @@ class KMeans {
     }
 
     testVector(v){
-        console.log(`Testing: ${v}`);
+        console.log(`Testing vector: ${v}`);
         let d = [];
         for (let i = 0; i < this.c; i++)
             d[i] = this._euclideanDistance(v, this.centers[i]);
