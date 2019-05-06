@@ -1,12 +1,14 @@
 $(document).ready(function () {
 	var KMeansInstance;
 	var GaussiannaiveBayesInstance;
+	var LloydInstance;
 
 	$('#inputGroupFileAddon02').click(function () {
 		new CSVReader($('#inputGroupFile02'), results => {
 			// console.log(results);
-			KMeansInstance = new KMeans(results.data, $('#k-means-param-b').val(), $('#k-means-param-e').val(), $('#k-means-param-c').val());
-			GaussiannaiveBayesInstance = new GaussiannaiveBayes(results.data);
+			// KMeansInstance = new KMeans(results.data, $('#k-means-param-b').val(), $('#k-means-param-e').val(), $('#k-means-param-c').val());
+			// GaussiannaiveBayesInstance = new GaussiannaiveBayes(results.data);
+			LloydInstance = new Lloyd_VoronoiIteration(results.data, $('#lloyd-param-e').val(), $('#lloyd-param-learning').val());
 		});
 	});
 
@@ -15,8 +17,8 @@ $(document).ready(function () {
 		var testResult = {};
 		new CSVReader($('#inputGroupFile03'), results => {
 			let x = results.data.pop();
-			testResult["Fuzzy C-Means Clustering"] = KMeansInstance.testVector(x);
-			testResult["Gaussian naive Bayes"] = GaussiannaiveBayesInstance.testVector(x);
+			// testResult["Fuzzy C-Means Clustering"] = KMeansInstance.testVector(x);
+			// testResult["Gaussian naive Bayes"] = GaussiannaiveBayesInstance.testVector(x);
 			// $('#testResult').text(`Class ${testResult[1]}`);
 			
 			for(let alg of Object.getOwnPropertyNames(testResult)){
