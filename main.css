@@ -9,6 +9,12 @@ h3 {
     text-align: center;
 }
 
+h4 {
+    
+    padding-left: 15px;
+    text-align: left;
+}
+
 tr.result {
     background: #00800052;
     box-shadow: inset 0px 0px 2px green;
