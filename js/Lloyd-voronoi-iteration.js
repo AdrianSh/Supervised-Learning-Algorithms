@@ -1,5 +1,5 @@
 class Lloyd_VoronoiIteration {
-    constructor(data, epsilon, learning) {
+    constructor(data, epsilon, learning, maxIterations) {
         this.data = data;
         this.learnReas = parseFloat(learning);
         this.eps = parseFloat(epsilon);
@@ -17,8 +17,8 @@ class Lloyd_VoronoiIteration {
         // For internal processing...
         this.prevCenters = this.centers.slice();
         this.iterations = 0;
-        this.maxIterations = 1000;
-        this.epsProgress = 0.0079;
+        this.maxIterations = maxIterations;
+        this.epsProgress = Math.min(0.0079, this.eps);
 
         this.m = this.classes.length;
 

@@ -34,7 +34,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm-epsilon">&epsilon;</span>
                     </div>
-                    <input type="number" value="0.02" min="0.00" step="0.01" id="k-means-param-e" class="form-control"
+                    <input type="number" value="0.01" min="0.00" step="0.01" id="k-means-param-e" class="form-control"
                         aria-label="Epsilon" aria-describedby="inputGroup-sizing-sm-epsilon">
                 </div>
             </div>
@@ -72,8 +72,17 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm-lloyd-epsilon">&epsilon;</span>
                     </div>
-                    <input type="number" value="0.02" min="0.00" step="0.01" id="lloyd-param-e" class="form-control"
+                    <input type="text" value="1e-9" min="0.0000000000" step="0.000000001" id="lloyd-param-e" class="form-control"
                         aria-label="Epsilon" aria-describedby="inputGroup-sizing-sm-lloyd-epsilon">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm-lloyd-num-ite">Max iterations</span>
+                    </div>
+                    <input type="number" value="10" min="1" step="1" id="lloyd-param-num-ite" class="form-control"
+                        aria-label="Max iterations" aria-describedby="inputGroup-sizing-sm-lloyd-num-ite">
                 </div>
             </div>
         </div>

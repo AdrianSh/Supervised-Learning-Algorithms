@@ -8,7 +8,7 @@ $(document).ready(function () {
 			// console.log(results);
 			KMeansInstance = new KMeans(results.data, $('#k-means-param-b').val(), $('#k-means-param-e').val(), $('#k-means-param-c').val());
 			GaussiannaiveBayesInstance = new GaussiannaiveBayes(results.data);
-			LloydInstance = new Lloyd_VoronoiIteration(results.data, $('#lloyd-param-e').val(), $('#lloyd-param-learning').val());
+			LloydInstance = new Lloyd_VoronoiIteration(results.data, $('#lloyd-param-e').val(), $('#lloyd-param-learning').val(), $('#lloyd-param-num-ite').val());
 		});
 	});
 
